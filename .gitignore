@@ -1,0 +1,4 @@
+__pycache__
+lora_model/
+ignore/
+human_scores.csv
