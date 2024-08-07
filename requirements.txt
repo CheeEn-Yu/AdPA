@@ -1,0 +1,7 @@
+transformers
+beautifulsoup4
+tqdm
+flask
+datasets
+peft
+trl

@@ -1,0 +1,96 @@
+body {
+  font-family: sans-serif;
+}
+
+#file-input {
+  margin-bottom: 20px;
+}
+
+#paper-container {
+  border: 1px solid #9b9b9b;
+  max-width: 1100px;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: justify;
+  line-height: 1.5;
+}
+
+#paper-container a:visited {
+  color: blue;
+}
+
+#paper-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Styles for LLM score and comment */
+#llm-score, #llm-comment {
+  font-style: italic;
+  color: #555;
+}
+
+/* Style for the LLM comment to ensure it doesn't break the layout */
+#llm-comment {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+#paper-topic {
+  font-size: 16px;
+  color: #4a4a4a;
+  margin-bottom: 10px;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+#paper-topic span {
+  font-weight: normal;
+}
+
+/* Style for user score input */
+#user-score {
+  width: 50px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+#submit-score {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#submit-score:hover {
+  background-color: #45a049;
+}
+
+#navigation {
+  display: flex;
+  max-width: 1100px;
+  position: fixed;
+  bottom: 20px;
+}
+
+#navigation p {
+  width: 200px;
+  padding-left: 450px;
+}
+
+#navigation button {
+  width: 100px;
+  border: 1px solid #9b9b9b;
+  cursor: pointer;
+}
+
+#navigation button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

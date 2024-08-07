@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paper Browser</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <label for="paper-file">Select a file:</label>
+  <select name="paper-file" id="paper-file">
+    {% for (i, pf) in paperFiles %}
+      <option value="{{ pf }}" {% if (i == 0) %} selected {% endif %}>{{ pf }}</option>
+    {% endfor %}
+  </select>
+  <div id="paper-container">
+    <p id="paper-topic"><b>Topic: </b><span></span></p>
+    <p id="paper-title"></p>
+    <p>(<a id="paper-pdf">pdf</a>) (<a id="paper-abs">abs</a>)</p>
+    <p><b>Rating: </b><span id="paper-rating"></span></p>
+    <p><b>Keywords: </b><span id="paper-keywords"></span></p>
+    <p><b>Abstract: </b><span id="paper-abstract"></span></p>
+    <p><b>Subjects: </b><span id="paper-subjects"></span></p>
+    <p><b>Comments: </b><span id="paper-comments"></span></p>
+    <p><b>LLM Score: </b><span id="llm-score"></span></p>
+    <p><b>LLM Comment: </b><span id="llm-comment"></span></p>
+    <p><b>Your Score: </b><input type="number" id="user-score" min="1" max="10" step="1">
+      <button id="submit-score">Submit Score</button></p>
+  </div>
+  <div id="navigation">
+    <p>Paper <span id="current-index"></span> out of <span id="total-papers"></span></p>
+    <button id="prev-paper" disabled><<<</button>
+    <button id="jump-paper">Jump</button>
+    <button id="next-paper">>>></button>
+  </div>
+  <script src="{{ url_for('static', filename='./script.js') }}"></script>
+</body>
+</html>
