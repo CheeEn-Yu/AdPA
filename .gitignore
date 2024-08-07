@@ -3,3 +3,4 @@ lora_model/
 ignore/
 human_scores.csv
 results/
+metadata.json
