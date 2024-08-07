@@ -1,5 +1,7 @@
 # AdPA : Adaptive Paper Agent
 
+![image](https://github.com/user-attachments/assets/b94e9a0c-50b2-4263-8e51-1a9e3045f0a2)
+
 
 ## Usage
 You may change the research topic in crawl.py  
