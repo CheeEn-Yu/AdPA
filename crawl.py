@@ -197,6 +197,8 @@ if (__name__ == "__main__"):
         tmp = [("total", total)] + [(k, v) for (k, v) in sorted(stat.items(), key = lambda x: -float(x[0]))]
         metadata[fromDate] = dict(tmp)
 
+
+        os.makedirs('results', exist_ok=True)
         with open(f"results/{fromDate}.json", "w") as f:
             json.dump(results, f, indent = 4)
 
