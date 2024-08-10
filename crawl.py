@@ -22,8 +22,8 @@ def getDates():
                         help = "start date, format: yyyy-mm-dd")
     parser.add_argument("--end", "-e", type = str, default = None, required = False,
                         help = "end date, format: yyyy-mm-dd or \"today\"")
-    parser.add_argument("--train", "-t", action="store_true", required=False,
-                        help= "Train the scoring LLM by human preference score")
+    parser.add_argument("--llm", action = "store_true", required = False,
+                        help = "activate llm to score the relevance")
     arg = parser.parse_args()
     dates = []
     fmt = lambda x: x.strftime("%Y-%m-%d")
@@ -145,9 +145,17 @@ def refresh():
 
 if (__name__ == "__main__"):
     dates, arg = getDates()
-    agent = PaperAgent()
-    agent.add_topic('LLM AI Agent')
-    agent.add_topic('Large Language Model')
+    if arg.llm:
+        agent = PaperAgent()
+        green_learning_intro = textwrap.dedent(f'''
+        Rapid advances in artificial intelligence (AI) in the last decade have largely been built upon the wide applications of deep learning (DL). However, the high carbon footprint yielded by larger and larger DL networks becomes a concern for sustainability. Furthermore, DL decision mechanism is somewhat obsecure and can only be verified by test data. Green learning (GL) has been proposed as an alternative paradigm to address these concerns. GL is characterized by low carbon footprints, small model sizes, low computational complexity, and logical transparency. It offers energy-effective solutions in cloud centers as well as mobile/edge devices. GL also provides a clear and logical decision-making process to gain people's trust. Several statistical tools have been developed to achieve this goal in recent years. They include subspace approximation, unsupervised and supervised representation learning, supervised discriminant feature selection, and feature space partitioning. We have seen a few successful GL examples with performance comparable with state-of-the-art DL solutions. This paper offers an introduction to GL, its demonstrated applications, and future outlook.
+        ''')
+        agent.add_topic('Green Learning')
+        agent.add_topic(green_learning_intro)
+    
+    # agent.add_topic('Large Language Model')
+    # agent.add_topic('Continual learning')
+    # agent.add_topic('Test-time adaptation for automatic speech recognition')
 
     if (len(dates) == 0):
         refresh()
@@ -170,21 +178,17 @@ if (__name__ == "__main__"):
             for paper in tqdm(papers):
                 result = parse(paper, rater)
                 if float(result['rating']) >= 1.5:
-                    score, raw_comment = agent.get_score(result)
-                    result['topic'] = agent.chosen_topic
-                    if score is not None and float(score) >= 7:
-                        result["llm_score"] = score
-                        result["llm_comment"] = raw_comment
-                        stat[result["rating"]] = stat.get(result["rating"], 0) + 1
-                        if arg.train:
-                            human_score = int(input('score the paper (int): '))
-                            paper_prompt = textwrap.dedent(f'''
-                                topic:{agent.chosen_topic}
-                                paper title: {result['title']}
-                                paper abstract: {result['abstract']}
-                            ''')
-                            result["human_score"] = human_score
+                    if arg.llm:
+                        score, raw_comment = agent.get_score(result)
+                        result['topic'] = agent.chosen_topic
+                        if score is not None and float(score) >= 2:
+                            result["llm_score"] = score
+                            result["llm_comment"] = raw_comment
+                            stat[result["rating"]] = stat.get(result["rating"], 0) + 1
+                            results.append(result)
+                    else:
                         results.append(result)
+
                     # else:
                     #     results.append(result)
                     #     stat[result["rating"]] = stat.get(result["rating"], 0) + 1
@@ -192,8 +196,11 @@ if (__name__ == "__main__"):
         if (total == 0):
             print(f"There are no papers from {fromDate} to {toDate} now. (skipped)")
             continue
+        if arg.llm:
+            results = sorted(results, key = lambda x: (-float(x["llm_score"]), x["paper id"]))
+        else:
+            results = sorted(results, key = lambda x: (-float(x["rating"]), x["paper id"]))
 
-        results = sorted(results, key = lambda x: (-float(x["llm_score"]), x["paper id"]))
         tmp = [("total", total)] + [(k, v) for (k, v) in sorted(stat.items(), key = lambda x: -float(x[0]))]
         metadata[fromDate] = dict(tmp)
 

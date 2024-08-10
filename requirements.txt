@@ -5,3 +5,5 @@ flask
 datasets
 peft
 trl
+bitsandbytes
+accelerate

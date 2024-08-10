@@ -206,13 +206,18 @@ class Rater:
         """
         self.SubjectOfInterest = {
             1: [
-                "cs.CL",    # Computation and Language
-                "cs.SD",    # Sound 
-                "eess.AS",  # Audio and Speech Processing
-                "cs.IR",    # Information Retrieval
+                # "cs.CL",    # Computation and Language
+                # "cs.SD",    # Sound 
+                # "eess.AS",  # Audio and Speech Processing
+                # "cs.IR",    # Information Retrieval
                 "cs.MA",    # Multiagent Systems
-                # "cs.CV",    # Computer Vision and Pattern Recognition
-                # "eess.IV",  # Image and Video Processing
+                "cs.CV",    # Computer Vision and Pattern Recognition
+                "eess.IV",  # Image and Video Processing
+                "cs.AR",
+                "cs.GR",
+                "cs.IT",
+                "cs.LG",
+                "cs.MM"
                 
             ],
             0.5: [
@@ -229,14 +234,20 @@ class Rater:
         """
         self.PhraseOfInterest = {
             -2: [
-                ["Chemistry"], ["Biology"]
+                ["Chemistry"], ["Biology"], ["Deep Learning"]
             ],
             -1: [
                 ["Social"], ["speech"]
             ],
             1: [
-                ["RAG"], ["Agent"]
+                ["Green Learning"]
             ]
+            # 0.5: [
+            #     ["Agent"], ["TTA"] , ["ASR"], ["Speech Recognition"]
+            # ],
+            # 1: [
+            #     ["RAG"], ["Test-time-adaptation"], ["Continual learning"], ["whisper"]
+            # ]
         }
 
         """
@@ -245,7 +256,10 @@ class Rater:
         self.ConferenceOfInterest = {
             0.5: [
                 "AAAI", "ECCV", "EMNLP", "ICASSP", "ICCV", "ICLR",
-                "Interspeech", "NeurIPS", "NIPS", "WACV", "ICML"
+                "Interspeech", "NeurIPS", "NIPS", "WACV", "ICML", "CVPR"
+            ],
+            1: [
+                "APSIPA"
             ]
             # CVPR
         }

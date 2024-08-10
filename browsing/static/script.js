@@ -91,7 +91,7 @@ async function selectFile() {
     });
     response_json = await response.json();
     papers = response_json["papers"];
-    currentPaperIndex = response_json["index"];
+    currentPaperIndex = 0;
     displayPaper(currentPaperIndex);
     updateNavigation();
 }
@@ -124,6 +124,22 @@ function jumpPaper() {
         }
         displayPaper(currentPaperIndex);
         updateNavigation();
+    }
+}
+
+function jumpToNextDay() {
+    const currentIndex = paperFile.selectedIndex;
+    if (currentIndex > 0) {
+        paperFile.selectedIndex = currentIndex - 1;
+        selectFile();
+    }
+}
+
+function jumpToPreviousDay() {
+    const currentIndex = paperFile.selectedIndex;
+    if (currentIndex < paperFile.options.length - 1) {
+        paperFile.selectedIndex = currentIndex + 1;
+        selectFile();
     }
 }
 
@@ -184,12 +200,30 @@ async function handleKeyDown(event) {
     } else if (key == "a") {
         navigator.clipboard.writeText(papers[currentPaperIndex]['abstract url'])
         alert("abstract url copied");
-    } else if (key == "?") {
-        alert("Keyboard shortcuts:\nprevious paper    : left, h\nnext paper           : right, l\nJump to index     : /\nFocus select file   : s\nOpen pdf             : p\nWrite note           : n\nCopy title             : t\nCopy abstract url : a\nFocus score input : r");
     }
-    // Add a new keyboard shortcut for submitting the score
     else if (key == "r") {
         userScore.focus();
+    } 
+    else if (key === "k") {
+        jumpToNextDay();
+    } 
+    else if (key === "j") {
+        jumpToPreviousDay();
+    }
+    else if (key === "?") {
+        alert("Keyboard shortcuts:\n" +
+              "previous paper: left, h\n" +
+              "next paper: right, l\n" +
+              "Jump to index: /\n" +
+              "Focus select file: s\n" +
+              "Open pdf: p\n" +
+              "Write note: n\n" +
+              "Copy title: t\n" +
+              "Copy abstract url: a\n" +
+              "Focus score input: r\n" +
+              "Submit score and next paper: Enter (when score input is focused)\n" +
+              "Jump to next day: k\n" +
+              "Jump to previous day: j");
     }
     if ((key === "ArrowLeft" || key === "ArrowRight") && document.activeElement === userScore) {
         event.preventDefault();
