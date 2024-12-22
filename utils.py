@@ -206,23 +206,21 @@ class Rater:
         """
         self.SubjectOfInterest = {
             1: [
+                "cs.RO"       # Robotics  
                 # "cs.CL",    # Computation and Language
                 # "cs.SD",    # Sound 
                 # "eess.AS",  # Audio and Speech Processing
                 # "cs.IR",    # Information Retrieval
-                "cs.MA",    # Multiagent Systems
-                "cs.CV",    # Computer Vision and Pattern Recognition
-                "eess.IV",  # Image and Video Processing
-                "cs.AR",
-                "cs.GR",
-                "cs.IT",
-                "cs.LG",
-                "cs.MM"
+                # "cs.MA",    # Multiagent Systems
+                # "cs.CV",    # Computer Vision and Pattern Recognition
+                # "eess.IV",  # Image and Video Processing
                 
             ],
             0.5: [
                 "cs.AI",    # Artificial Intelligence
                 "cs.LG",    # Machine Learning
+                "cs.AR",
+                "cs.DC"
                 # "cs.SI",    # Social and Information Networks
                 # "cs.CY"     # Computers and Society
             ]
@@ -234,20 +232,14 @@ class Rater:
         """
         self.PhraseOfInterest = {
             -2: [
-                ["Chemistry"], ["Biology"], ["Deep Learning"]
+                ["Chemistry"], ["Biology"]
             ],
             -1: [
                 ["Social"], ["speech"]
             ],
             1: [
-                ["Green Learning"]
+                ["Robotics"]
             ]
-            # 0.5: [
-            #     ["Agent"], ["TTA"] , ["ASR"], ["Speech Recognition"]
-            # ],
-            # 1: [
-            #     ["RAG"], ["Test-time-adaptation"], ["Continual learning"], ["whisper"]
-            # ]
         }
 
         """
@@ -258,10 +250,6 @@ class Rater:
                 "AAAI", "ECCV", "EMNLP", "ICASSP", "ICCV", "ICLR",
                 "Interspeech", "NeurIPS", "NIPS", "WACV", "ICML", "CVPR"
             ],
-            1: [
-                "APSIPA"
-            ]
-            # CVPR
         }
 
     

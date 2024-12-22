@@ -147,15 +147,8 @@ if (__name__ == "__main__"):
     dates, arg = getDates()
     if arg.llm:
         agent = PaperAgent()
-        green_learning_intro = textwrap.dedent(f'''
-        Rapid advances in artificial intelligence (AI) in the last decade have largely been built upon the wide applications of deep learning (DL). However, the high carbon footprint yielded by larger and larger DL networks becomes a concern for sustainability. Furthermore, DL decision mechanism is somewhat obsecure and can only be verified by test data. Green learning (GL) has been proposed as an alternative paradigm to address these concerns. GL is characterized by low carbon footprints, small model sizes, low computational complexity, and logical transparency. It offers energy-effective solutions in cloud centers as well as mobile/edge devices. GL also provides a clear and logical decision-making process to gain people's trust. Several statistical tools have been developed to achieve this goal in recent years. They include subspace approximation, unsupervised and supervised representation learning, supervised discriminant feature selection, and feature space partitioning. We have seen a few successful GL examples with performance comparable with state-of-the-art DL solutions. This paper offers an introduction to GL, its demonstrated applications, and future outlook.
-        ''')
-        agent.add_topic('Green Learning')
-        agent.add_topic(green_learning_intro)
+        agent.add_topic('deep learning for robotics')
     
-    # agent.add_topic('Large Language Model')
-    # agent.add_topic('Continual learning')
-    # agent.add_topic('Test-time adaptation for automatic speech recognition')
 
     if (len(dates) == 0):
         refresh()
@@ -181,7 +174,7 @@ if (__name__ == "__main__"):
                     if arg.llm:
                         score, raw_comment = agent.get_score(result)
                         result['topic'] = agent.chosen_topic
-                        if score is not None and float(score) >= 2:
+                        if score is not None and float(score) >= 6:
                             result["llm_score"] = score
                             result["llm_comment"] = raw_comment
                             stat[result["rating"]] = stat.get(result["rating"], 0) + 1

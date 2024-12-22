@@ -4,3 +4,4 @@ ignore/
 human_scores.csv
 results/
 metadata.json
+test*
